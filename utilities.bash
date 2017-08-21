@@ -49,7 +49,7 @@ function copy {
 		i=$[$#-2]
 		[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
 		makedir "$(dirname "$dest")"
-		[[ -e "$dest" ]] || cp -Rvf "$@"
+		[[ -e "$dest" ]] || cp -Rv "$@"
 	fi
 }
 
@@ -57,7 +57,7 @@ function difcopy {
 	if [[ ${1-} && ${2-} ]]; then
 		[[ ${2:(-1)} == '/' ]] && set - "$1" "$2$(basename "$1")"
 		makedir "$(dirname "$2")"
-		diff "$1" "$2" &> /dev/null || cp -vf "$1" "$2"
+		diff "$1" "$2" &> /dev/null || cp -v "$1" "$2"
 	fi
 }
 
@@ -68,7 +68,7 @@ function move {
 		dest="${@:(-1)}"
 		[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
 		makedir "$(dirname "$dest")"
-		[[ -e "$dest" ]] || mv -vf "$@"
+		[[ -e "$dest" ]] || mv -v "$@"
 	fi
 }
 
@@ -84,7 +84,7 @@ function link {
 				makedir "$(dirname "$dest")"
 			fi
 		fi
-		ln -vs "$@"
+		[[ -e "$dest" ]] || ln -vs "$@"
 	fi
 }
 
