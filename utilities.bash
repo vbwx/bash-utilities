@@ -161,7 +161,8 @@ function isroot {
 }
 
 function runasroot {
-	exec -c sudo bash "$(readlink -f "$0")" "$@"
+	exec -c sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && \
+		pwd)/$(basename "${BASH_SOURCE[0]}")" "$@"
 }
 
 function usage {
