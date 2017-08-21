@@ -49,7 +49,7 @@ function copy {
 		i=$[$#-2]
 		[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
 		makedir "$(dirname "$dest")"
-		[[ -e "$dest" ]] || cp -Rv "$@"
+		[[ -e $dest ]] || cp -Rv "$@"
 	fi
 }
 
@@ -68,7 +68,7 @@ function move {
 		dest="${@:(-1)}"
 		[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
 		makedir "$(dirname "$dest")"
-		[[ -e "$dest" ]] || mv -v "$@"
+		[[ -e $dest ]] || mv -v "$@"
 	fi
 }
 
@@ -76,15 +76,12 @@ function link {
 	local i dest
 	if [[ ${1-} ]]; then
 		if [[ ${2-} ]]; then
-			i=$[$#-2]
 			dest="${@:(-1)}"
-			if [[ ${dest:(-1)} == '/' ]]; then
-				makedir "$dest"
-			else
-				makedir "$(dirname "$dest")"
-			fi
+			i=$[$#-2]
+			[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
+			makedir "$(dirname "$dest")"
 		fi
-		[[ -e "$dest" ]] || ln -vs "$@"
+		[[ -e $dest ]] || ln -vs "$@"
 	fi
 }
 
