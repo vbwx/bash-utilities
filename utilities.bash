@@ -74,7 +74,7 @@ function move {
 
 function link {
 	local i dest
-	if [[ ${1-} ]]; then
+	if [[ ${1-} && -e $1 ]]; then
 		if [[ ${2-} ]]; then
 			dest="${@:(-1)}"
 			i=$[$#-2]
@@ -113,7 +113,7 @@ function explode {
 		if [[ ${2:0:1} == '+' ]]; then
 			items=(${1//${2:1}/$'\n'})
 		else
-			items=(${1/${2:1}/$'\n'})
+			items=(${1/$2/$'\n'})
 		fi
 	else
 		items=(${1//:/$'\n'})
