@@ -20,12 +20,12 @@ function exist {
 }
 
 function inshare {
-	[[ -e "/usr/share/$1" || -e "$prefix/share/$1" || -e "$HOME/.local/share/$1" ]]
+	[[ -e "/usr/share/$1" || -e "/usr/local/share/$1" || -e "$HOME/.local/share/$1" ]]
 }
 
 function islocal {
 	local bin="$(type -P "$1" 2> /dev/null)"
-	exist "$1" && [[ ${bin#*$prefix} != $bin ]]
+	exist "$1" && [[ ${bin#*/usr/local} != $bin ]]
 }
 
 function inhome {
