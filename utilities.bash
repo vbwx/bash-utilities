@@ -25,7 +25,7 @@ function inshare {
 
 function islocal {
 	local bin="$(type -P "$1" 2> /dev/null)"
-	exist "$1" && [[ ${bin#*/usr/local} != $bin ]]
+	exist "$1" && [[ ${bin#*/usr/local} != $bin && ${bin#*$HOME} != $bin ]]
 }
 
 function inhome {
