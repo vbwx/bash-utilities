@@ -161,26 +161,3 @@ function runasroot {
 	exec -c sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && \
 		pwd)/$(basename "${BASH_SOURCE[0]}")" "$@"
 }
-
-function usage {
-	local script="$(basename "$0")"
-	println "usage: $script arguments..." >&2
-	if [[ $# -eq 0 ]]; then
-		println "   or  $script --version"
-	else
-		println "Try '$script --help' for more information." >&2
-		exit $1
-	fi
-	println
-}
-
-function help {
-	usage 2>&1
-	cat <<-EOF
-	Description
-
-	Options
-	...
-EOF
-	exit
-}
