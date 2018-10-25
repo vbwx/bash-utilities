@@ -7,12 +7,12 @@ function print {
 }
 
 function die {
-	println "$script: $1" >&2
+	println "$(basename "$0"): $1" >&2
 	exit 1
 }
 
 function warn {
-	printf "\n%s!\n" "$*" >&2
+	printf "\n$(basename "$0"): %s!\n" "$*" >&2
 }
 
 function exist {
