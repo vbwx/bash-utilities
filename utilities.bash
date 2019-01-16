@@ -44,7 +44,7 @@ function download {
 
 function copy {
 	local i dest
-	if [[ ${1-} && ${2-}]]; then
+	if [[ ${1-} && ${2-} ]]; then
 		dest="${@:(-1)}"
 		i=$[$#-2]
 		[[ ${dest:(-1)} == '/' ]] && set - "${@:1:$i}" "$dest$(basename "$1")"
